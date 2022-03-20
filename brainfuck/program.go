@@ -13,7 +13,7 @@ func newProgram(c []command, mem *memory) *program {
 }
 
 func (p program) Execute() {
-	for _, command := range p.commands {
-		command.Execute(p.memory)
+	for _, cmd := range p.commands {
+		cmd.Execute(p.memory)
 	}
 }

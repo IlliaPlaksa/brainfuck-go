@@ -45,8 +45,8 @@ type Loop struct {
 
 func (l Loop) Execute(mem *memory) {
 	for mem.buffer[mem.ptr] != 0 {
-		for _, command := range l.commands {
-			command.Execute(mem)
+		for _, cmd := range l.commands {
+			cmd.Execute(mem)
 		}
 	}
 }
