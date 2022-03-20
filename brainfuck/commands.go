@@ -50,3 +50,11 @@ func (l Loop) Execute(mem *memory) {
 		}
 	}
 }
+
+type IncrementByFive struct{}
+
+func (IncrementByFive) Execute(mem *memory) {
+	for i := 0; i < 5; i++ {
+		mem.buffer[mem.ptr]++
+	}
+}
