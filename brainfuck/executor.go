@@ -1,5 +1,7 @@
 package brainfuck
 
+import "strings"
+
 func Interpret(program string) {
 	exec := compile(program)
 	exec.Execute()
@@ -16,6 +18,10 @@ type Parser struct {
 	ptr   int
 }
 
+var repeatedCommands = map[string]rune{
+	"+++++": '$',
+}
+
 func newParser() *Parser {
 	return &Parser{
 		stack: [][]command{[]command{}},
@@ -24,16 +30,30 @@ func newParser() *Parser {
 }
 
 func (p *Parser) parse(input string) []command {
-	for _, char := range input {
+	tmp := replaceRepeatedCommands(input)
+
+	for _, char := range tmp {
 		p.parseInstruction(char)
 	}
 	return p.stack[0]
+}
+
+func replaceRepeatedCommands(input string) string {
+	result := input
+
+	for key, symbol := range repeatedCommands {
+		result = strings.Replace(result, key, string(symbol), -1)
+	}
+
+	return result
 }
 
 func (p *Parser) parseInstruction(char rune) {
 	switch char {
 	case '+':
 		p.stack[p.ptr] = append(p.stack[p.ptr], Increment{})
+	case '$':
+		p.stack[p.ptr] = append(p.stack[p.ptr], IncrementByFive{})
 	case '-':
 		p.stack[p.ptr] = append(p.stack[p.ptr], Decrement{})
 	case '>':
