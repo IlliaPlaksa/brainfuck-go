@@ -2,13 +2,13 @@ package brainfuck
 
 /*
 	Main function of brainfuck API.
-Executes BrainFuck program passed as argument.
+Executes BrainFuck code passed as argument.
 	Note:
 Output of program will be entered to console.
 */
-func Interpret(program string) {
-	exec := compile(program)
-	exec.Execute()
+func Interpret(code string) {
+	p := compile(code)
+	p.Execute()
 }
 
 func compile(input string) *program {
