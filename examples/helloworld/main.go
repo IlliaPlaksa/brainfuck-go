@@ -1,6 +1,8 @@
 package main
 
-import "brainfuck/brainfuck"
+import (
+	"github.com/IlliaPlaksa/brainfuck-go/brainfuck"
+)
 
 func main() {
 	program := "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++."
