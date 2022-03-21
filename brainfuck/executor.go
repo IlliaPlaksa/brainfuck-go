@@ -17,26 +17,26 @@ func compile(input string) *program {
 	return result
 }
 
-type Parser struct {
+type parser struct {
 	stack [][]command
 	ptr   int
 }
 
-func newParser() *Parser {
-	return &Parser{
+func newParser() *parser {
+	return &parser{
 		stack: [][]command{{}},
 		ptr:   0,
 	}
 }
 
-func (p *Parser) parse(input string) []command {
+func (p *parser) parse(input string) []command {
 	for _, char := range input {
 		p.parseInstruction(char)
 	}
 	return p.stack[0]
 }
 
-func (p *Parser) parseInstruction(char rune) {
+func (p *parser) parseInstruction(char rune) {
 	switch char {
 	case '+':
 		p.stack[p.ptr] = append(p.stack[p.ptr], Increment{})
