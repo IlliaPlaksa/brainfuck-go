@@ -55,6 +55,5 @@ func (p *Parser) parseInstruction(char rune) {
 		p.stack[p.ptr-1] = append(p.stack[p.ptr-1], Loop{p.stack[p.ptr]})
 		p.stack = p.stack[:p.ptr]
 		p.ptr--
-	default:
 	}
 }
