@@ -24,7 +24,7 @@ type Parser struct {
 
 func newParser() *Parser {
 	return &Parser{
-		stack: [][]command{[]command{}},
+		stack: [][]command{{}},
 		ptr:   0,
 	}
 }
