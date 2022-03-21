@@ -26,14 +26,14 @@ func TestLoop_execute(t *testing.T) {
 	}{
 		{
 			"does not execute commands if current cell equals to zero",
-			fields{[]command{MoveForward{}, Increment{}}},
+			fields{[]command{moveForward{}, increment{}}},
 			args{memory: newMemory()},
 			*newMemory(),
 		},
 		{
 			"executes all commands if current cell value is non-zero",
 			fields{[]command{
-				MoveForward{}, Increment{}, Increment{}, MoveBackward{}, Decrement{},
+				moveForward{}, increment{}, increment{}, moveBackward{}, decrement{},
 			}},
 			args{memory: input},
 			*expected,
@@ -41,7 +41,7 @@ func TestLoop_execute(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			l := Loop{commands: tt.fields.commands}
+			l := loop{commands: tt.fields.commands}
 			l.Execute(tt.args.memory)
 			if !reflect.DeepEqual(*tt.args.memory, tt.expected) {
 				t.Errorf("Expected %v \n but have %v", tt.expected, *tt.args.memory)

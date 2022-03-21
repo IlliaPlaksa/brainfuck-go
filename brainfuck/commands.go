@@ -9,9 +9,9 @@ type command interface {
 /*
 	Moves pointer in memory struct to right
 */
-type MoveForward struct{}
+type moveForward struct{}
 
-func (MoveForward) Execute(mem *memory) {
+func (moveForward) Execute(mem *memory) {
 	if mem.ptr == len(mem.buffer)-1 {
 		mem.buffer = append(mem.buffer, 0)
 	}
@@ -21,47 +21,47 @@ func (MoveForward) Execute(mem *memory) {
 /*
 	Moves pointer in memory struct to left
 */
-type MoveBackward struct{}
+type moveBackward struct{}
 
-func (MoveBackward) Execute(mem *memory) {
+func (moveBackward) Execute(mem *memory) {
 	mem.ptr--
 }
 
 /*
 	Increments current memory buffer's cell by one
 */
-type Increment struct{}
+type increment struct{}
 
-func (Increment) Execute(mem *memory) {
+func (increment) Execute(mem *memory) {
 	mem.buffer[mem.ptr]++
 }
 
 /*
 	Decrements current memory buffer's cell by one
 */
-type Decrement struct{}
+type decrement struct{}
 
-func (Decrement) Execute(mem *memory) {
+func (decrement) Execute(mem *memory) {
 	mem.buffer[mem.ptr]--
 }
 
 /*
 	Prints value of current memory buffer's cell to console
 */
-type Print struct{}
+type output struct{}
 
-func (Print) Execute(mem *memory) {
+func (output) Execute(mem *memory) {
 	fmt.Print(string(mem.buffer[mem.ptr]))
 }
 
 /*
 	Executes commands in loop until memory buffer's current cell is non-zero
 */
-type Loop struct {
+type loop struct {
 	commands []command
 }
 
-func (l Loop) Execute(mem *memory) {
+func (l loop) Execute(mem *memory) {
 	for mem.buffer[mem.ptr] != 0 {
 		for _, cmd := range l.commands {
 			cmd.Execute(mem)
