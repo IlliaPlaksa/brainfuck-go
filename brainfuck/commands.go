@@ -68,3 +68,14 @@ func (l loop) Execute(mem *memory) {
 		}
 	}
 }
+
+/*
+	Increments current memory buffer's cell by five
+*/
+type incrementByFive struct{}
+
+func (incrementByFive) Execute(mem *memory) {
+	for i := 0; i < 5; i++ {
+		mem.buffer[mem.ptr]++
+	}
+}
