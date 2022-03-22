@@ -51,6 +51,37 @@ func TestSimpleCommands_Execute(t *testing.T) {
 	}
 }
 
+func TestOutput_Execute(t *testing.T) {
+	type args struct {
+		memory *memory
+	}
+	tests := []struct {
+		name     string
+		command  command
+		args     args
+		expected string
+	}{
+		{
+			name:     "should output letter \"A\" to console",
+			command:  output{},
+			args:     args{memory: newMemory([]byte{65}, 0)},
+			expected: "A",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			out := captureStdout(func() {
+				tt.command.Execute(tt.args.memory)
+			})
+
+			if !reflect.DeepEqual(out, tt.expected) {
+				t.Errorf("Expected %v \n but have %v", tt.expected, out)
+			}
+		})
+	}
+}
+
 func TestLoop_execute(t *testing.T) {
 	type fields struct {
 		commands []command
