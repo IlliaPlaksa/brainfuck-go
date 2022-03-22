@@ -5,9 +5,9 @@ type memory struct {
 	ptr    int
 }
 
-func newMemory() *memory {
+func newMemory(bytes []byte, pointer int) *memory {
 	return &memory{
-		buffer: []byte{0},
-		ptr:    0,
+		buffer: bytes,
+		ptr:    pointer,
 	}
 }
