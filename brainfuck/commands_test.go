@@ -6,12 +6,6 @@ import (
 )
 
 func TestLoop_execute(t *testing.T) {
-	input := newMemory()
-	input.buffer[0] = 1
-
-	expected := newMemory()
-	expected.buffer = append(expected.buffer, 2)
-
 	type fields struct {
 		commands []command
 	}
@@ -27,16 +21,16 @@ func TestLoop_execute(t *testing.T) {
 		{
 			"does not execute commands if current cell equals to zero",
 			fields{[]command{moveForward{}, increment{}}},
-			args{memory: newMemory()},
-			*newMemory(),
+			args{memory: newMemory([]byte{0}, 0)},
+			*newMemory([]byte{0}, 0),
 		},
 		{
 			"executes all commands if current cell value is non-zero",
 			fields{[]command{
 				moveForward{}, increment{}, increment{}, moveBackward{}, decrement{},
 			}},
-			args{memory: input},
-			*expected,
+			args{memory: newMemory([]byte{1}, 0)},
+			*newMemory([]byte{0, 2}, 0),
 		},
 	}
 	for _, tt := range tests {
