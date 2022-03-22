@@ -1,8 +1,6 @@
 package brainfuck
 
-/*
-	Main function of brainfuck API.
-Executes BrainFuck code passed as argument.
+/*Interpret executes BrainFuck code passed as argument.
 	Note:
 Output of program will be entered to console.
 */
