@@ -65,18 +65,16 @@ func TestLoop_execute(t *testing.T) {
 		expected memory
 	}{
 		{
-			"does not execute commands if current cell equals to zero",
-			fields{[]command{moveForward{}, increment{}}},
-			args{memory: newMemory([]byte{0}, 0)},
-			*newMemory([]byte{0}, 0),
+			name:     "does not execute commands if current cell equals to zero",
+			fields:   fields{[]command{moveForward{}, increment{}}},
+			args:     args{memory: newMemory([]byte{0}, 0)},
+			expected: *newMemory([]byte{0}, 0),
 		},
 		{
-			"executes all commands if current cell value is non-zero",
-			fields{[]command{
-				moveForward{}, increment{}, increment{}, moveBackward{}, decrement{},
-			}},
-			args{memory: newMemory([]byte{1}, 0)},
-			*newMemory([]byte{0, 2}, 0),
+			name:     "executes all commands if current cell value is non-zero",
+			fields:   fields{[]command{moveForward{}, increment{}, increment{}, moveBackward{}, decrement{}}},
+			args:     args{memory: newMemory([]byte{1}, 0)},
+			expected: *newMemory([]byte{0, 2}, 0),
 		},
 	}
 	for _, tt := range tests {
