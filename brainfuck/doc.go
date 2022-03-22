@@ -1,5 +1,5 @@
 /*
-	Package provides a functionality of BrainFuck programming language interpreter
+Package brainfuck provides a functionality of interpreter of BrainFuck programming language
 Example usage:
 		"Hello, world!" program in BrainFuck
 		brainfuck.Interpret("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.")
