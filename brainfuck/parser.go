@@ -15,6 +15,8 @@ func newParser() *parser {
 }
 
 func (p *parser) parse(input string) []command {
+	input = replaceRepeatedInstructions(input)
+
 	for _, char := range input {
 		p.parseInstruction(char)
 	}
