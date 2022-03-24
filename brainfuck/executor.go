@@ -1,9 +1,8 @@
 package brainfuck
 
-/*Interpret executes BrainFuck code passed as argument.
-	Note:
-Output of program will be entered to console.
-*/
+// Interpret executes BrainFuck code passed as argument.
+//	Note:
+// Output of program will be entered to console.
 func Interpret(input string) {
 	p := compile(input)
 	p.execute()
