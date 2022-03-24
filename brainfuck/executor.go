@@ -12,6 +12,6 @@ func Interpret(input string) {
 func compile(input string) *program {
 	p := newParser()
 	commands := p.parse(input)
-	program := newProgram(commands, newMemory([]byte{0}, 0))
-	return program
+	mem := newMemory([]byte{0}, 0)
+	return newProgram(commands, mem)
 }
