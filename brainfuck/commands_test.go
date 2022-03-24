@@ -43,7 +43,7 @@ func TestSimpleCommands_Execute(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			tt.command.Execute(tt.args.memory)
+			tt.command.execute(tt.args.memory)
 			if !reflect.DeepEqual(*tt.args.memory, tt.expected) {
 				t.Errorf("Expected %v \n but have %v", tt.expected, *tt.args.memory)
 			}
@@ -72,7 +72,7 @@ func TestOutput_Execute(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			out := captureStdout(func() {
-				tt.command.Execute(tt.args.memory)
+				tt.command.execute(tt.args.memory)
 			})
 
 			if !reflect.DeepEqual(out, tt.expected) {
@@ -111,7 +111,7 @@ func TestLoop_execute(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			l := loop{commands: tt.fields.commands}
-			l.Execute(tt.args.memory)
+			l.execute(tt.args.memory)
 			if !reflect.DeepEqual(*tt.args.memory, tt.expected) {
 				t.Errorf("Expected %v \n but have %v", tt.expected, *tt.args.memory)
 			}

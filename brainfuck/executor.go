@@ -6,7 +6,7 @@ Output of program will be entered to console.
 */
 func Interpret(code string) {
 	p := compile(code)
-	p.Execute()
+	p.execute()
 }
 
 func compile(input string) *program {

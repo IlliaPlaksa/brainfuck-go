@@ -3,7 +3,7 @@ package brainfuck
 import "fmt"
 
 type command interface {
-	Execute(mem *memory)
+	execute(mem *memory)
 }
 
 /*
@@ -11,7 +11,7 @@ type command interface {
 */
 type moveForward struct{}
 
-func (moveForward) Execute(mem *memory) {
+func (moveForward) execute(mem *memory) {
 	if mem.ptr == len(mem.buffer)-1 {
 		mem.buffer = append(mem.buffer, 0)
 	}
@@ -23,7 +23,7 @@ func (moveForward) Execute(mem *memory) {
 */
 type moveBackward struct{}
 
-func (moveBackward) Execute(mem *memory) {
+func (moveBackward) execute(mem *memory) {
 	mem.ptr--
 }
 
@@ -32,7 +32,7 @@ func (moveBackward) Execute(mem *memory) {
 */
 type increment struct{}
 
-func (increment) Execute(mem *memory) {
+func (increment) execute(mem *memory) {
 	mem.buffer[mem.ptr]++
 }
 
@@ -41,7 +41,7 @@ func (increment) Execute(mem *memory) {
 */
 type decrement struct{}
 
-func (decrement) Execute(mem *memory) {
+func (decrement) execute(mem *memory) {
 	mem.buffer[mem.ptr]--
 }
 
@@ -50,7 +50,7 @@ func (decrement) Execute(mem *memory) {
 */
 type output struct{}
 
-func (output) Execute(mem *memory) {
+func (output) execute(mem *memory) {
 	fmt.Print(string(mem.buffer[mem.ptr]))
 }
 
@@ -61,10 +61,10 @@ type loop struct {
 	commands []command
 }
 
-func (l loop) Execute(mem *memory) {
+func (l loop) execute(mem *memory) {
 	for mem.buffer[mem.ptr] != 0 {
 		for _, cmd := range l.commands {
-			cmd.Execute(mem)
+			cmd.execute(mem)
 		}
 	}
 }
