@@ -6,9 +6,7 @@ type command interface {
 	execute(mem *memory)
 }
 
-/*
-	Moves pointer in memory struct to right
-*/
+//	Moves pointer in memory struct to right
 type moveForward struct{}
 
 func (moveForward) execute(mem *memory) {
@@ -18,45 +16,35 @@ func (moveForward) execute(mem *memory) {
 	mem.ptr++
 }
 
-/*
-	Moves pointer in memory struct to left
-*/
+// Moves pointer in memory struct to left
 type moveBackward struct{}
 
 func (moveBackward) execute(mem *memory) {
 	mem.ptr--
 }
 
-/*
-	Increments current memory buffer's cell by one
-*/
+// Increments current memory buffer's cell by one
 type increment struct{}
 
 func (increment) execute(mem *memory) {
 	mem.buffer[mem.ptr]++
 }
 
-/*
-	Decrements current memory buffer's cell by one
-*/
+//	Decrements current memory buffer's cell by one
 type decrement struct{}
 
 func (decrement) execute(mem *memory) {
 	mem.buffer[mem.ptr]--
 }
 
-/*
-	Prints value of current memory buffer's cell to console
-*/
+// Prints value of current memory buffer's cell to console
 type output struct{}
 
 func (output) execute(mem *memory) {
 	fmt.Print(string(mem.buffer[mem.ptr]))
 }
 
-/*
-	Executes commands in loop until memory buffer's current cell is non-zero
-*/
+// Executes commands in loop until memory buffer's current cell is non-zero
 type loop struct {
 	commands []command
 }
