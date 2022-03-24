@@ -6,7 +6,7 @@ type command interface {
 	execute(mem *memory)
 }
 
-//	Moves pointer in memory struct to right
+//	Moves pointer in memory to right
 type moveForward struct{}
 
 func (moveForward) execute(mem *memory) {
@@ -16,7 +16,7 @@ func (moveForward) execute(mem *memory) {
 	mem.ptr++
 }
 
-// Moves pointer in memory struct to left
+// Moves pointer in memory to left
 type moveBackward struct{}
 
 func (moveBackward) execute(mem *memory) {
