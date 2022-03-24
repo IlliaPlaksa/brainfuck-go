@@ -4,8 +4,8 @@ package brainfuck
 	Note:
 Output of program will be entered to console.
 */
-func Interpret(code string) {
-	p := compile(code)
+func Interpret(input string) {
+	p := compile(input)
 	p.execute()
 }
 
