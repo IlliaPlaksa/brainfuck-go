@@ -30,8 +30,14 @@ func TestSimpleCommands_Execute(t *testing.T) {
 		{
 			name:     "should move memory pointer to the right",
 			command:  moveForward{},
-			args:     args{memory: newMemory([]byte{0}, 0)},
+			args:     args{memory: newMemory([]byte{0, 0}, 0)},
 			expected: *newMemory([]byte{0, 0}, 1),
+		},
+		{
+			name:     "should expand buffer and move pointer to the right",
+			command:  moveForward{},
+			args:     args{memory: newMemory([]byte{0, 0}, 1)},
+			expected: *newMemory([]byte{0, 0, 0}, 2),
 		},
 		{
 			name:     "should move memory pointer to the left",
