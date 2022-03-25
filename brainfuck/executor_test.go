@@ -9,16 +9,30 @@ import (
 
 func captureStdout(f func()) string {
 	old := os.Stdout
-	r, w, _ := os.Pipe()
+
+	r, w, err := os.Pipe()
+	if err != nil {
+		panic(err)
+	}
+
 	os.Stdout = w
 
 	f()
 
-	w.Close()
+	closeError := w.Close()
+	if closeError != nil {
+		panic(closeError)
+	}
+
 	os.Stdout = old
 
 	var buf bytes.Buffer
-	io.Copy(&buf, r)
+
+	_, copyError := io.Copy(&buf, r)
+	if copyError != nil {
+		panic(copyError)
+	}
+
 	return buf.String()
 }
 
