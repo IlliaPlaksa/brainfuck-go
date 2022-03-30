@@ -26,7 +26,7 @@ func TestParser_parse(t *testing.T) {
 			},
 		},
 		{
-			name:     "should parse input with third party symbols",
+			name:     "should skip third party symbols in input",
 			args:     args{"+#-@><)."},
 			expected: []command{increment{}, decrement{}, moveForward{}, moveBackward{}, output{}},
 		},
