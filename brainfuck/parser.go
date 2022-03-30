@@ -12,6 +12,8 @@ func newParser() *parser {
 	}
 }
 
+// parse function constructs sequence of commands base on input string
+// all third party symbols in input will be ignored
 func (p *parser) parse(input string) []command {
 	for _, char := range input {
 		p.parseInstruction(char)
