@@ -44,6 +44,8 @@ func (p *parser) parseInstruction(char rune) {
 		p.stack[p.ptr-1] = append(p.stack[p.ptr-1], loop{p.stack[p.ptr]})
 		p.stack = p.stack[:p.ptr]
 		p.ptr--
+	case '$':
+		p.stack[p.ptr] = append(p.stack[p.ptr], incrementByFive{})
 	}
 }
 
