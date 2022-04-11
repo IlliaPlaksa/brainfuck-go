@@ -1,5 +1,7 @@
 package brainfuck
 
+import "strings"
+
 type parser struct {
 	stack [][]command
 	ptr   int
@@ -15,6 +17,8 @@ func newParser() *parser {
 // parse function constructs sequence of commands base on input string
 // all third party symbols in input will be ignored
 func (p *parser) parse(input string) []command {
+	input = replaceRepeatedInstructions(input)
+
 	for _, char := range input {
 		p.parseInstruction(char)
 	}
@@ -40,5 +44,21 @@ func (p *parser) parseInstruction(char rune) {
 		p.stack[p.ptr-1] = append(p.stack[p.ptr-1], loop{p.stack[p.ptr]})
 		p.stack = p.stack[:p.ptr]
 		p.ptr--
+	case '$':
+		p.stack[p.ptr] = append(p.stack[p.ptr], incrementByFive{})
 	}
+}
+
+var repeatedInstructions = map[string]rune{
+	"+++++": '$',
+}
+
+func replaceRepeatedInstructions(program string) string {
+	optimized := program
+
+	for seq, symbol := range repeatedInstructions {
+		optimized = strings.ReplaceAll(optimized, seq, string(symbol))
+	}
+
+	return optimized
 }

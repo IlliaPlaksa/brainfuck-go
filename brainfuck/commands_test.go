@@ -45,6 +45,12 @@ func TestSimpleCommands_Execute(t *testing.T) {
 			args:     args{memory: newMemory([]byte{0, 0, 0}, 2)},
 			expected: *newMemory([]byte{0, 0, 0}, 1),
 		},
+		{
+			name:     "should increment buffer's cell with index [0] by five",
+			command:  incrementByFive{},
+			args:     args{memory: newMemory([]byte{0}, 0)},
+			expected: *newMemory([]byte{5}, 0),
+		},
 	}
 
 	for _, tt := range tests {
