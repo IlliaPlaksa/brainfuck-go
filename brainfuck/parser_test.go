@@ -16,11 +16,11 @@ func TestParser_parse(t *testing.T) {
 	}{
 		{
 			name: "should parse proper input",
-			args: args{"[++++++-><.]"},
+			args: args{"[++++++-><.$]"},
 			expected: []command{
 				loop{
 					[]command{
-						incrementByFive{}, increment{}, decrement{}, moveForward{}, moveBackward{}, output{},
+						incrementByFive{}, increment{}, decrement{}, moveForward{}, moveBackward{}, output{}, incrementByFive{},
 					},
 				},
 			},
@@ -28,7 +28,7 @@ func TestParser_parse(t *testing.T) {
 		{
 			name:     "should skip third party symbols in input",
 			args:     args{"+$#-@><)."},
-			expected: []command{increment{}, decrement{}, moveForward{}, moveBackward{}, output{}},
+			expected: []command{increment{}, incrementByFive{}, decrement{}, moveForward{}, moveBackward{}, output{}},
 		},
 	}
 
