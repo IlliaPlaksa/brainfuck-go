@@ -57,8 +57,7 @@ func replaceRepeatedInstructions(program string) string {
 	optimized := program
 
 	for seq, symbol := range repeatedInstructions {
-		cleared := strings.ReplaceAll(optimized, string(symbol), "") // delete all entries of the symbol
-		optimized = strings.ReplaceAll(cleared, seq, string(symbol))
+		optimized = strings.ReplaceAll(optimized, seq, string(symbol))
 	}
 
 	return optimized
